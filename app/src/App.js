@@ -1,106 +1,95 @@
-import React, { useState } from "react"
-import logo from "./logo.svg"
-import styles from "./App.module.scss"
-import cx from "classnames"
-import Comp, { a /* default as Comp */ } from "./Component"
-// import "./App.scss"
+import React, { Component, PureComponent } from "react"
+import Unmountable from "./Unmountable"
+import CountriesList from "./CountriesList"
+import { getData } from "./helpers"
 
-// class App extends React.Component {
-//   constructor(props) {
-//     super(props)
-//     // { className: 'kazkas' }
-//     // Don't call this.setState() here!
-//     this.state = { logoIsShown: true }
-//     this.toggleImage = this.toggleImage.bind(this)
-//   }
-//   toggleImage() {
-//     this.setState((state) => ({
-//       logoIsShown: !state.logoIsShown,
-//     }))
-//   }
-//   render() {
-//     return (
-//       //React.createElement(App, { className: cx(styles.App), style:{ border: '1px solid red'} })
-//       // <div className={`${styles.App} ${styles.appLogo}`}>
-
-//       <div className={cx(styles.App)}>
-//         <header>
-//           <img
-//             src={logo}
-//             className={cx(
-//               styles.appLogo,
-//               !this.state.logoIsShown && styles.dNone
-//             )}
-//             alt="logo"
-//           />
-//           <h1>TITLE</h1>
-//           <p onClick={this.toggleImage}>TOGGLE IMAGE</p>
-//           <a
-//             className="App-link"
-//             href="https://reactjs.org"
-//             target="_blank"
-//             rel="noopener noreferrer"
-//           >
-//             Learn React
-//           </a>
-//         </header>
-//         <div>sdkjhsdhjsdhjsdsdjh</div>
-//       </div>
-//     )
-//   }
-// }
-
-function App() {
-  const [isShown, setIsShown] = useState(true)
-  const [isTextShown, setIsTextShown] = useState(true)
-  const [isX, setIsX] = useState(true)
-
-  const func = () => {
-    setIsShown(!isShown)
-    setIsX(!isX)
+// https://restcountries-v1.p.rapidapi.com/all
+export default class App extends Component {
+  constructor() {
+    super()
+    this.state = {
+      variable: true,
+      allCountries: [],
+      countries: null,
+      countryName: "",
+    }
+    this.updateVar = this.updateVar.bind(this)
   }
 
-  const obj = {
-    name: "Jonas",
-    surname: "Jonaitis",
-    obj2: {
-      age: 18,
-    },
+  async getAllCountries() {
+    const allCountries = await getData(
+      "https://restcountries-v1.p.rapidapi.com/all"
+    )
+    if (allCountries) this.setState({ allCountries })
+  }
+  async getCountriesByCountryName(input) {
+    const countries = await getData(
+      `https://restcountries-v1.p.rapidapi.com/name/${input}`
+    )
+    if (countries) {
+      this.setState({ countries })
+    } else {
+      this.setState({ countries: null })
+    }
   }
 
-  const { name: manoVardas, surname, obj2: { age } = {}, obj2 } = obj
-  // const state = arr[0]
-  // const setState = arr[1]
-  // (() => React.createElement())()
+  updateVar() {
+    // this.setState({ variable: false }) // setState async method
+    // this.setState({ variable: !this.setState }) // setState async method
+    // this.setState((state) => ({ variable: !state.variable }))
+    this.setState((state) => ({ variable: !state.variable }))
+  }
 
-  return (
-    // <div className={`${styles.App} ${styles.appLogo}`}>
-    <div className={cx(styles.App)}>
-      {isTextShown && <Comp setIsShown={func} />}
-      <header>
-        <img
-          src={logo}
-          className={cx(styles.appLogo, !isShown && styles.dNone)}
-          alt="logo"
+  componentDidMount() {
+    console.log("MOUNTED")
+    this.getAllCountries()
+  }
+
+  // componentDidUpdate(prevProps, prevState) {
+  //   console.log("UPDATED")
+  //   if (prevState.countryName !== this.state.countryName) {
+  //     this.getCountriesByCountryName(this.state.countryName)
+  //   }
+
+  //   // if (this.state.variable === false) {
+  //   //   this.updateVar(true)
+  //   // }
+  // }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    console.log({
+      nextProps,
+      oldProps: this.props,
+      nextState,
+      oldState: this.state,
+    })
+    // return nextProps !== this.props
+    return nextState !== this.state
+  }
+
+  render() {
+    const { countryName, variable, allCountries, countries } = this.state
+    console.log(countryName, countries)
+    //  this.updateVar() negalima updateitinti state'o, bus infinity loopas
+    return (
+      <div>
+        <button onClick={this.updateVar}>SPAUSTI {`${variable}`}</button>
+        {this.state.variable &&
+          Unmountable({ x: "props ", updateVar: this.updateVar })}
+        {/* {this.state.variable && <Unmountable x="props" />} */}
+        <input
+          type="text"
+          name="countryName"
+          value={countryName}
+          onChange={(event) => {
+            const name = event.target.name
+            const value = event.target.value
+            this.setState({ [name]: value })
+            this.getCountriesByCountryName(value)
+          }}
         />
-        <h1>TITLE {isX ? "test" : "not"}</h1>
-        <p onClick={func}>toggle image</p>
-        {isTextShown && (
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        )}
-      </header>
-      <div onClick={() => setIsTextShown(!isTextShown)}>
-        sdkjhsdhjsdhjsdsdjh
+        <CountriesList countries={countries || allCountries} />
       </div>
-    </div>
-  )
+    )
+  }
 }
-
-export default App
