@@ -1,8 +1,6 @@
 import React from "react"
 import ReactDOM from "react-dom"
 import "normalize.css"
-import "./reset.css"
-import "./App.scss"
 import App from "./App"
 import * as serviceWorker from "./serviceWorker"
 
