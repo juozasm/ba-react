@@ -16,3 +16,15 @@ function App(props) {
 }
 
 export default App
+
+// const mapStateToProps = (state /*, ownProps*/) => {
+//     return {
+//         testFeature: state.testFeature,
+//     }
+// }
+
+// const mapDispatchToProps = {
+//     testAction,
+// }
+
+//export default connect(mapStateToProps, mapDispatchToProps)(App)
