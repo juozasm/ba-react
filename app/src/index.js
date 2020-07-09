@@ -6,10 +6,13 @@ import * as serviceWorker from "./serviceWorker"
 import { ThemeProvider } from "styled-components"
 import { Provider } from "react-redux"
 import store from "./store"
+import theme from "./styled/theme"
 
 ReactDOM.render(
     <Provider store={store}>
-        <App />
+        <ThemeProvider theme={theme}>
+            <App />
+        </ThemeProvider>
     </Provider>,
     document.getElementById("root")
 )
