@@ -7,18 +7,23 @@
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
     "classnames": "^2.2.6",
+    "concurrently": "^5.2.0",
+    "core-js": "^3.6.5",
+    "json-server": "^0.16.1",
     "node-sass": "^4.13.1",
     "normalize.css": "^8.0.1",
     "prop-types": "^15.7.2",
     "react": "^16.13.0",
+    "react-app-polyfill": "^1.0.6",
     "react-dom": "^16.13.0",
     "react-redux": "^7.2.0",
-    "react-scripts": "3.4.0",
+    "react-router-dom": "^5.2.0",
+    "react-scripts": "^3.4.1",
     "redux": "^4.0.5",
     "styled-components": "^5.1.1"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "concurrently \"json-server --port 4000 --watch ./server/db.json\" \"react-scripts start\"",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
@@ -35,7 +40,8 @@
     "development": [
       "last 1 chrome version",
       "last 1 firefox version",
-      "last 1 safari version"
+      "last 1 safari version",
+      "not dead"
     ]
   },
   "devDependencies": {

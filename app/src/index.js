@@ -1,3 +1,8 @@
+/* polyfills */
+import "react-app-polyfill/ie11"
+import "react-app-polyfill/ie9"
+import "core-js"
+
 import React from "react"
 import ReactDOM from "react-dom"
 import "normalize.css"
@@ -9,12 +14,12 @@ import store from "./store"
 import theme from "./styled/theme"
 
 ReactDOM.render(
-    <Provider store={store}>
-        <ThemeProvider theme={theme}>
-            <App />
-        </ThemeProvider>
-    </Provider>,
-    document.getElementById("root")
+  <Provider store={store}>
+    <ThemeProvider theme={theme}>
+      <App />
+    </ThemeProvider>
+  </Provider>,
+  document.getElementById("root")
 )
 
 // If you want your app to work offline and load faster, you can change
