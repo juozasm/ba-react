@@ -5,6 +5,14 @@ const GlobalStyle = createGlobalStyle`
     * {
         box-sizing: border-box;
     }
+    button{
+        border: 0;
+        outline: 0;
+        &:focus, &:hover{
+            border: 0;
+            outline: 0;
+        }
+    }
     body {
         font-family: 'Roboto', sans-serif;
     }

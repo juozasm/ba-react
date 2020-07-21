@@ -1,6 +1,4 @@
 import React from "react"
-import { useSelector, useDispatch } from "react-redux"
-import { testAction as testActionCreator } from "../store/testFeature/testActions"
 import GlobalStyle from "../styled/GlobalStyle"
 import mainRoutes from "../routes"
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom"

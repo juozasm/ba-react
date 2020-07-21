@@ -1,18 +1,33 @@
 import React from "react"
 import PropTypes from "prop-types"
 import { Link } from "react-router-dom"
+import styled from "styled-components"
+
+const StyledNav = styled.nav`
+  width: 100%;
+`
+
+const StyledUl = styled.ul`
+  display: flex;
+  list-style: none;
+  width: 100%;
+  flex: 1;
+  li {
+    padding: 0 15px;
+  }
+`
 
 export default function MainNav({ routes }) {
   return (
-    <nav>
-      <ul>
+    <StyledNav>
+      <StyledUl>
         {routes.map(({ text, href }, i) => (
           <li key={i}>
             <Link to={href}>{text}</Link>
           </li>
         ))}
-      </ul>
-    </nav>
+      </StyledUl>
+    </StyledNav>
   )
 }
 

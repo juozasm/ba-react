@@ -1,6 +1,6 @@
 import { combineReducers } from "redux"
-import testFeature from "./testFeature"
+import cart from "./cart"
 
 export default combineReducers({
-    testFeature
+  cart,
 })
