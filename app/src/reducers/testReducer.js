@@ -1,4 +1,4 @@
-import { TEST_ACTION } from "./testTypes"
+import { TEST_ACTION } from "../constants/testConstants"
 
 const testReducer = (state = {}, action) => {
     switch (action.type) {
@@ -6,7 +6,7 @@ const testReducer = (state = {}, action) => {
             return {
                 ...state,
                 // test: action.test
-                test: action.payload
+                test: action.payload,
             }
         default:
             return state
