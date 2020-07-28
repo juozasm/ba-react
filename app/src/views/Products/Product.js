@@ -1,6 +1,6 @@
 import React, { useEffect } from "react"
-import CommonLayout from "../../components/base/CommonLayout"
-import { getProduct } from "../../api/productsAPI"
+import CommonLayout from "components/base/CommonLayout"
+import { getProduct } from "api/productsAPI"
 import { useState } from "react"
 import { useParams } from "react-router-dom"
 

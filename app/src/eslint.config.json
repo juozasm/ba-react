@@ -1,0 +1,26 @@
+{
+    "extends": [
+      "eslint:recommended",
+      "plugin:react/recommended",
+      "prettier"
+    ],
+    "settings": {
+      "import/resolver": {
+        "webpack": {
+          "config": "webpack.config.js"
+        },
+        "node": {
+          "extensions": [".js", ".jsx"]
+        }
+      }
+    },
+    "plugins": ["prettier"],
+    "parser": "babel-eslint",
+    "env": {
+      "browser": true,
+      "node": true
+    },
+    "rules": {
+      "prettier/prettier": ["error"]
+    }
+  }

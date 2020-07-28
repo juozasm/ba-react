@@ -1,5 +1,5 @@
 import request from "./request"
-import qs from "query-string"
+import generateUrlParams from "utils/generateUrlParamsFromArray"
 
 export function getProducts() {
   return request("/products", "GET")
@@ -10,7 +10,6 @@ export function getProduct(id) {
 }
 
 export function getProductsById(ids) {
-  const urlParams = qs.stringify({ id: ids })
-  console.log(ids, urlParams)
+  const urlParams = generateUrlParams(ids.map(id => ({ name: 'id', value: id})))
   return request(`/products?${urlParams}`, "GET")
 }
