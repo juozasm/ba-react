@@ -1,11 +1,6 @@
 import * as types from "./productsTypes"
+import { createAction } from "@reduxjs/toolkit"
 
-export function fetchProducts() {
-  return ({ type: types.REQUESTING })
-}
-export function productsReceived(payload) {
-  return ({ type: types.SUCCESS, payload })
-}
-export function productsReceiveFailure(error) {
-  return ({ type: types.FAILURE, error:String(error) })
-}
+export const fetchProducts = createAction(types.REQUESTING)
+export const productsReceived = createAction(types.SUCCESS)
+export const productsReceiveFailure = createAction(types.FAILURE)

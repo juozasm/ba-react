@@ -4,6 +4,8 @@
   "description": "shop",
   "main": "./src/index.js",
   "dependencies": {
+    "@reduxjs/toolkit": "^1.4.0",
+    "@types/styled-components": "^5.1.1",
     "autoprefixer": "^9.7.4",
     "axios": "^0.19.2",
     "babel-polyfill": "^6.26.0",

@@ -1,34 +1,28 @@
-import * as types from "./productsTypes"
+import * as actions from "./productsActions"
+import { createReducer } from "@reduxjs/toolkit"
 
 const initialState = {
-    data: null,
     requesting: false,
+    data: null,
     error: null,
 }
 
-const productsReducer = (state = initialState, action) => {
-    switch (action.type) {
-        case types.REQUESTING:
-            return {
-                requesting: true,
-                data: null,
-                error: null,
-            }
-        case types.SUCCESS:
-            return {
-                requesting: false,
-                data: action.payload,
-                error: null,
-            }
-        case types.FAILURE:
-            return {
-                requesting: false,
-                data: null,
-                error: action.error,
-            }
-        default:
-            return state
-    }
-}
+const productsReducer = createReducer(initialState,{
+    [actions.fetchProducts]: () => ({
+        requesting: true,
+        data: null,
+        error: null,
+    }),
+    [actions.productsReceived]: (state, action) => ({
+        requesting: false,
+        data: action.payload,
+        error: null,
+    }),
+    [actions.productsReceiveFailure]: (state, action) => ({
+        requesting: false,
+        data: null,
+        error: action.payload,
+    })
+})
 
 export default productsReducer

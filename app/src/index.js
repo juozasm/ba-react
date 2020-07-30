@@ -1,4 +1,5 @@
 /* polyfills */
+import 'url-search-params-polyfill'
 import "core-js/stable";
 import 'babel-polyfill';
 import "react-app-polyfill/ie11"

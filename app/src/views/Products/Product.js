@@ -4,7 +4,7 @@ import { getProduct } from "api/productsAPI"
 import { useState } from "react"
 import { useParams } from "react-router-dom"
 
-export default function Products() {
+export default function Product() {
   const [product, setProduct] = useState(null)
   const [isFetching, setIsFetching] = useState(false)
 
@@ -17,8 +17,6 @@ export default function Products() {
       setIsFetching(false)
     })
   }, [id])
-
-  console.log(product)
 
   return (
     <CommonLayout>

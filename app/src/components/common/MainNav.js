@@ -17,6 +17,11 @@ const StyledUl = styled.ul`
   }
 `
 
+/**
+ * Assign routes to navigation
+ * @param {Object[]} routes - main application routes
+ */
+
 export default function MainNav({ routes }) {
   return (
     <StyledNav>

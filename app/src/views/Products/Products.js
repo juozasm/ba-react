@@ -1,16 +1,11 @@
 import React, { useEffect } from "react"
 import CommonLayout from "../../components/base/CommonLayout"
-import { getProducts } from "../../api/productsAPI"
 import { Link } from "react-router-dom"
-import useRequest from "../../hooks/useRequest"
 import AddToCart from "../../components/common/Cart/AddToCart"
+import useProducts from "hooks/useProducts"
 
 export default function Products() {
-  const [{ error, isFetching, data: products }, makeRequest] = useRequest()
-
-  useEffect(() => {
-    makeRequest(getProducts)
-  }, [makeRequest])
+  const { error, isFetching, products } = useProducts()
 
   return (
     <CommonLayout>
