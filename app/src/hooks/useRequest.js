@@ -1,4 +1,5 @@
 import { useReducer, useCallback } from "react"
+import useIsMounted from "./useIsMounted"
 
 const initialState = {
   data: null,
@@ -39,13 +40,21 @@ export const reducer = (state = initialState, action) => {
 
 export default function useRequest() {
   const [state, dispatch] = useReducer(reducer, initialState)
+  const isMounted = useIsMounted()
   const makeRequest = useCallback((api, ...params) => {
     dispatch({ type: types.REQUESTING })
     api(...params)
-      .then((d) => {
-        dispatch({ type: types.SUCCESS, payload: d })
+      .then((res) => {
+        if (isMounted.current) {
+          dispatch({ type: types.SUCCESS, payload: res.data })
+        }
       })
-      .catch((error) => dispatch({ type: types.FAILURE, error: String(error) }))
+      .catch((error) => {
+        console.log(error)
+        if (isMounted.current) {
+          dispatch({ type: types.FAILURE, error: String(error) })
+        }
+      })
   }, [])
   return [state, makeRequest]
 }

@@ -15,7 +15,11 @@ export default function Cart({ products }) {
   const [{ error, isFetching, data }, makeRequest] = useRequest()
   console.log(products)
   useEffect(() => {
-    makeRequest(getProductsById, Object.keys(products))
+    const { fetch, cancel } = getProductsById(Object.keys(products))
+    makeRequest(fetch)
+    return () => {
+      cancel("Component has been umounted")
+    }
   }, [makeRequest, products])
 
   return (
