@@ -1,19 +1,17 @@
 import React from "react"
 import GlobalStyle from "../styled/GlobalStyle"
-import mainRoutes from "../routes"
+import routes from "../routes"
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom"
-import Product from "./Products/Product"
 
-function App(props) {
+function App() {
   return (
     <>
       <GlobalStyle />
       <Router>
         <Switch>
-          {mainRoutes.map(({ href, component }) => (
+          {routes.map(({ href, component }) => (
             <Route key={href} exact path={href} component={component} />
           ))}
-          <Route exact path={"/products/:id"} component={Product} />
         </Switch>
       </Router>
     </>

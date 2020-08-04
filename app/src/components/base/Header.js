@@ -15,11 +15,15 @@ const StyledHeader = styled.header`
   padding: 20px 40px 20px 20px;
 `
 
+function getMainRoutes(routes) {
+  return routes.filter(({ inMainNavigation }) => inMainNavigation)
+}
+
 export default function Header() {
   return (
     <StyledHeader>
       <MainLogo />
-      <MainNav routes={mainRoutes} />
+      <MainNav routes={getMainRoutes(mainRoutes)} />
       <Cart />
     </StyledHeader>
   )
