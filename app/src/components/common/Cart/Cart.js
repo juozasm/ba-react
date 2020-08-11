@@ -3,6 +3,7 @@ import useRequest from "../../../hooks/useRequest"
 import { getProductsById } from "../../../api/productsAPI"
 import styled from "styled-components"
 import { useEffect } from "react"
+import { useSelector } from "react-redux"
 
 const StyledCart = styled.div`
   position: absolute;
