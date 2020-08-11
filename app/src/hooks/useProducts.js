@@ -4,12 +4,13 @@ import { fetchProducts } from "store/products/productsActions"
 
 export default function useProducts() {
     const dispatch = useDispatch()
+    const token = useSelector((state) => state.auth.token)
     const { error, isFetching, data: products } = useSelector(
         (state) => state.products
     )
 
     useEffect(() => {
-        dispatch(fetchProducts())
+        if (token) dispatch(fetchProducts(token))
     }, [])
 
     return { error, isFetching, products }

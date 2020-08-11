@@ -4,6 +4,7 @@ import MainLogo from "../common/MainLogo"
 import MainNav from "../common/MainNav"
 import mainRoutes from "../../routes"
 import Cart from "../common/Cart"
+import AuthButton from "../base/AuthButton"
 
 const StyledHeader = styled.header`
   display: flex;
@@ -25,6 +26,7 @@ export default function Header() {
       <MainLogo />
       <MainNav routes={getMainRoutes(mainRoutes)} />
       <Cart />
+      <AuthButton/>
     </StyledHeader>
   )
 }

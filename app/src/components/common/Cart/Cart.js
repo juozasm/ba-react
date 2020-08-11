@@ -13,9 +13,10 @@ const StyledCart = styled.div`
 
 export default function Cart({ products }) {
   const [{ error, isFetching, data }, makeRequest] = useRequest()
+  const token = useSelector(state => state.auth.token )
   console.log(products)
   useEffect(() => {
-    const { fetch, cancel } = getProductsById(Object.keys(products))
+    const { fetch, cancel } = getProductsById(token, Object.keys(products))
     makeRequest(fetch)
     return () => {
       cancel("Component has been umounted")
